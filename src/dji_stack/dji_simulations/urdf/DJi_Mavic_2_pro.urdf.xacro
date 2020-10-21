@@ -1,0 +1,160 @@
+<?xml version='1.0'?>
+
+<robot name="DJi_Mavic_2_pro" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- //////////////////////////////////////////////////////////////////// -->
+  <!-- Included URDFs -->
+  <!-- xacro:include filename="$(find mybot_description)/urdf/mybot.gazebo" />
+  <xacro:include filename="$(find mybot_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find mybot_description)/urdf/macros.xacro" / -->
+
+
+  <!-- //////////////////////////////////////////////////////////////////// -->
+  <!-- Geometric properties of the platform and sensors -->
+  <!-- //////////////////////////////////////////////////////////////////// -->
+  <!-- Base -->
+
+  <!-- Camera -->
+  <xacro:property name="cameraSize" value="0.05"/>
+  <xacro:property name="cameraMass" value="0.1"/>
+
+
+
+
+  <!-- //////////////////////////////////////////////////////////////////// -->
+  <!-- Macro to define a RGB-D camera, implemented as a fixed link -->
+  <xacro:macro name="RGBD_camera" params="parent type location *origin">
+    <joint name="camera_joint" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz=".2 0 0" rpy="0 0 0"/>
+      <parent link="DJi_Mavic_2_pro"/>
+      <child link="camera"/>
+    </joint>
+
+
+    <link name="camera">
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+        </geometry>
+      </collision>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="${cameraSize} ${cameraSize} ${cameraSize}"/>
+        </geometry>
+        <material name="green"/>
+      </visual>
+
+      <inertial>
+        <mass value="${cameraMass}" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <box_inertia m="${cameraMass}" x="${cameraSize}" y="${cameraSize}" z="${cameraSize}" />
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial>
+    </link>
+
+
+    <gazebo reference="camera">
+      <material>Gazebo/Green</material>
+      <sensor type="camera" name="camera1">
+        <update_rate>30.0</update_rate>
+        <camera name="head">
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>800</width>
+            <height>800</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.02</near>
+            <far>300</far>
+          </clip>
+        </camera>
+        <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
+            <baseline>0.2</baseline>
+            <alwaysOn>true</alwaysOn>
+            <!-- Keep this zero, update_rate in the parent <sensor> tag
+              will control the frame rate. -->
+            <updateRate>0.0</updateRate>
+            <cameraName>camera_ir</cameraName>
+            <imageTopicName>/camera/color/image_raw</imageTopicName>
+            <cameraInfoTopicName>/camera/color/camera_info</cameraInfoTopicName>
+            <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+            <depthImageCameraInfoTopicName>/camera/depth/camera_info</depthImageCameraInfoTopicName>
+            <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+            <frameName>camera_link</frameName>
+            <pointCloudCutoff>0.5</pointCloudCutoff>
+            <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+            <distortionK1>0</distortionK1>
+            <distortionK2>0</distortionK2>
+            <distortionK3>0</distortionK3>
+            <distortionT1>0</distortionT1>
+            <distortionT2>0</distortionT2>
+            <CxPrime>0</CxPrime>
+            <Cx>0</Cx>
+            <Cy>0</Cy>
+            <focalLength>0</focalLength>
+            <hackBaseline>0</hackBaseline>
+          </plugin>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+
+
+  <!-- //////////////////////////////////////////////////////////////////// -->
+  <!-- Macro to define Dji_Mavix_2_pro (base_link), implemented as a fixed link -->
+  <xacro:macro name="base_link" params="parent type location *origin">
+
+    <link
+      name="DJi_Mavic_2_pro">
+      <inertial>
+        <origin
+          xyz="-0.00229883780330419 -0.0027490489333868 -0.004"
+          rpy="0 0 0" />
+        <mass
+          value="0.899" />
+        <inertia
+          ixx="0"
+          ixy="0"
+          ixz="0"
+          iyy="0"
+          iyz="0"
+          izz="0" />
+      </inertial>
+      <visual>
+        <origin
+          xyz="-0.00229883780330419 -0.0027490489333868 -0.004"
+          rpy="1.5707963267949 0 1.5707963267949" />
+        <geometry>
+          <mesh
+            filename="/home/ros/dji_ws/src/dji_stack/dji_simulations/urdf/DJi_Mavic_2_pro/meshes/DJi_Mavic_2_pro.STL" />
+        </geometry>
+        <material
+          name="">
+          <color
+            rgba="1 0 0 1" />
+          <texture
+            filename="/home/ros/dji_ws/src/dji_stack/dji_simulations/urdf/DJi_Mavic_2_pro/textures/" />
+        </material>
+      </visual>
+      <collision>
+        <origin
+          xyz="-0.00229883780330419 -0.0027490489333868 -0.004"
+          rpy="1.5707963267949 0 1.5707963267949" />
+        <geometry>
+          <mesh
+            filename="/home/ros/dji_ws/src/dji_stack/dji_simulations/urdf/DJi_Mavic_2_pro/meshes/DJi_Mavic_2_pro.STL" />
+        </geometry>
+      </collision>
+    </link>
+
+
+  </xacro:macro>
+
+
+
+</robot>
