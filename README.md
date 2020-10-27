@@ -46,5 +46,38 @@ sudo apt-get install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
 
 ``` 
 ## hector_quadrotor installation
+Pretty standard, only "special thing" is to remember to use rosdep:
+
+Go to your workspace (replace to fit your own src folder)
+```c
+cd /path/to/your/catkin_ws/src
+``` 
+
+Clone the hector_quadrotor package to your workspace
+```c
+git clone https://github.com/tu-darmstadt-ros-pkg/hector_quadrotor.git
+``` 
+
+
+Go one level up (base level of ws)
+```c
+cd ..
+``` 
+
+Update
+```c
+rosdep update
+``` 
+
+Install dependencies (replace "kinetic" with your distribution, if you for some reason use anything else)
+```c
+rosdep install --from-paths src/ --ignore-src --rosdistro kinetic
+``` 
+
+You can now catkin_make your project
+```c
+catkin_make
+``` 
+
 
 ## MoveIt installation
