@@ -2,14 +2,14 @@
 
 # Prerequisites (click for installation guide)
   - [ROS Kinetic Installation](#ROS-Kinetic-Installation)
-  - [Gazebo 7.16.1 Installation](#Gazebo-7.16.1-Installation)
+  - [Gazebo 7.16.1 Installation](#Gazebo-Installation)
   - [hector_quadrotor package installation](#hector_quadrotor-installation)
   - [MoveIt installation](#MoveIt-installation)
   
 ## ROS Kinetic Installation
 
-## Gazebo 7.16.1 Installation
-NOTE this will install a debian version of Gazebo
+## Gazebo Installation
+NOTE this will install a debian version of Gazebo 7.16.1
 First remove the old version of Gazebo
 ```c
 sudo apt-get remove *gazebo*
