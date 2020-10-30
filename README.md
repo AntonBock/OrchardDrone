@@ -80,8 +80,32 @@ You can now catkin_make your project
 catkin_make
 ``` 
 
-
 ## MoveIt installation
+```c
+wstool init src
+``` 
+
+
+```c
+wstool merge -t src https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall
+``` 
+
+
+```c
+wstool update -t src
+``` 
+
+
+```c
+rosdep install -y --from-paths src --ignore-src --rosdistro kinetic
+``` 
+
+
+```c
+catkin config --extend /opt/ros/kinetic --cmake-args -DCMAKE_BUILD_TYPE=Release 
+``` 
+
+
 
 ## Octomap installation
 Download both octomap_mapping, and octomap_server from github
