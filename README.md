@@ -75,6 +75,11 @@ Install dependencies (replace "kinetic" with your distribution, if you for some 
 rosdep install --from-paths src/ --ignore-src --rosdistro kinetic
 ``` 
 
+Install further dependencies
+```c
+rosinstall . hector_quadrotor.rosinstall
+``` 
+
 You can now catkin_make your project
 ```c
 catkin_make
