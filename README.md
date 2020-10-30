@@ -5,6 +5,7 @@
   - [Gazebo 7.16.1 Installation](#Gazebo-Installation)
   - [hector_quadrotor package installation](#hector_quadrotor-installation)
   - [MoveIt installation](#MoveIt-installation)
+  - [Octomap Installation9](#Octomap-installation)
   
 ## ROS Kinetic Installation
 
@@ -81,3 +82,31 @@ catkin_make
 
 
 ## MoveIt installation
+
+## Octomap installation
+Download both octomap_mapping, and octomap_server from github
+
+cmake
+
+navigate to octomap_mapping/octomap_server/launch
+
+open octomap_mapping.launch in editor
+
+Make sure frame_id and cloud_in are set correctly. Our standard should be "world" and "/camera/depth/points":
+
+<param name="frame_id" type="string" value="world" />
+<remap from="cloud_in" to="/camera/depth/points" />
+
+You might want to edit the resolution as well.
+
+Now launch simulation+RViz.
+In second window, launch octomapping: roslaunch octomap_server octomap_mapping.launch
+
+When done mapping, save octomap by writing rosrun octomap_server octomap_saver -f NameOfOctomap.bt
+
+Saving can (maybe?) be done after stopping the mapping process in the terminal
+
+
+When loading in RViz, you may need to restart RViz. use MarkerArray and occupied_cells_vis_array
+
+When making the load_octomap.py, give executable permission
