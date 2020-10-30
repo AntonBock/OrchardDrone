@@ -111,6 +111,12 @@ rosdep install -y --from-paths src --ignore-src --rosdistro kinetic
 catkin config --extend /opt/ros/kinetic --cmake-args -DCMAKE_BUILD_TYPE=Release 
 ``` 
 
+### Start use
+```c
+roslaunch moveit_setup_assistant setup_assistant.launch
+``` 
+
+Follow RobotIgnite course: Programming drones with ROS - 3D navigation with MoveIt
 
 
 ## Octomap installation
