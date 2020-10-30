@@ -81,6 +81,12 @@ catkin_make
 ``` 
 
 ## MoveIt installation
+### Binary installation:
+```c
+sudo apt-get install ros-kinetic-moveit 
+``` 
+
+### Source installation:
 ```c
 wstool init src
 ``` 
