@@ -5,7 +5,7 @@
   - [Gazebo 7.16.1 Installation](#Gazebo-Installation)
   - [hector_quadrotor package installation](#hector_quadrotor-installation)
   - [MoveIt installation](#MoveIt-installation)
-  - [Octomap Installation9](#Octomap-installation)
+  - [Octomap Installation](#Octomap-installation)
   
 ## ROS Kinetic Installation
 
