@@ -125,7 +125,17 @@ Follow RobotIgnite course: Programming drones with ROS - 3D navigation with Move
 
 
 ## Octomap installation
-Download both octomap_mapping, and octomap_server from github
+Download both octomap_mapping from github
+
+```c
+git clone https://github.com/OctoMap/octomap_mapping
+```
+
+Install dependencies
+```c 
+sudo apt-get install ros-kinetic-octomap ros-kinetic-octomap-mapping ros-kinetic-octomap-msgs ros-kinetic-octomap-ros ros-kinetic-octomap-rviz-plugins ros-kinetic-octomap-server
+```
+
 
 cmake
 
