@@ -1,4 +1,4 @@
-## pcl_communication
+## pcl_communication package
 
 Subscribed topic for .pcd files: /cloud_pcd 
 (only uses one or the other)
