@@ -11,9 +11,21 @@ Published topic: /volumetric_data
     
 ### Executing the code
             
-1. roscore
-2. rosrun pcl_communication pcl_communication 
-3. rosrun pcl_ros pcd_to_pointcloud dataTree.pcd
+1. Run roscore
+```c
+roscore
+``` 
+
+2.  Run the pcl_communication program 
+```c
+rosrun pcl_communication pcl_communication
+``` 
+
+3. Send .pcd file to the /cloud_pcd topic
+```c
+rosrun pcl_ros pcd_to_pointcloud dataTree.pcd
+```
+
                 
 ----
 
@@ -21,3 +33,4 @@ Published topic: /volumetric_data
 
 1. Update this READme
 2. Clean and comment code
+3. Create launch file for running the program
