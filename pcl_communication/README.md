@@ -5,10 +5,13 @@ Subscribed topic for .pcd files: /cloud_pcd
 Subscribed topic for live data: /camera/depth/color/points
 Published topic: /volumetric_data
 
+----
+
 ### Prerequisites (click for installation guide)
  - 
 
-    
+----
+
 ### Executing the code
             
 1. roscore
