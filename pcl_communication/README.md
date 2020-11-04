@@ -37,3 +37,4 @@ rosrun pcl_ros pcd_to_pointcloud dataTree.pcd
 1. Update this READme
 2. Clean and comment code
 3. Create launch file for running the program
+4. Global TreeID tracking (involves adjusting the .msg also)
