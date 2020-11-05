@@ -163,6 +163,12 @@ When loading in RViz, you may need to restart RViz. use MarkerArray and occupied
 
 When making the load_octomap.py, give executable permission
 
+## tum_ardrone package
+In ws/src
+```c
+git clone https://bitbucket.org/theconstructcore/tum_ardrone_sim.git
+```
+
 
 ## Fix
 
