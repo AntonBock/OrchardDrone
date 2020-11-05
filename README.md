@@ -9,6 +9,7 @@
   - [Fix 05/11](#Fix)
   
 ## ROS Kinetic Installation
+http://wiki.ros.org/kinetic/Installation/Ubuntu
 
 ## Gazebo Installation
 NOTE this will install a debian version of Gazebo 7.16.1
