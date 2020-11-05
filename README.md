@@ -44,9 +44,14 @@ sudo apt-get install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
 ``` 
 
 
+Add some extra math files: 
+Navigate to the correct folder, and add the math files found in 
 ```c
-
+sudo nautilus /usr/include/ignition/math2/ignition/math
 ``` 
+
+
+
 ## hector_quadrotor installation
 Pretty standard, only "special thing" is to remember to use rosdep:
 
