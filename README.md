@@ -175,7 +175,9 @@ In ws/src
 git clone https://bitbucket.org/theconstructcore/tum_ardrone_sim.git
 ```
 
-###To install ground plane and oak_tree models in Gazebo:
+Go into tum_ardrone_sim/tum-simulator-indigo, and remove the action_controller folder.
+
+### To install ground plane and oak_tree models in Gazebo:
 1\. Download the folder "Gazebo Models" from drive (Project/Simulation)
 2\. In terminal write the following:
 
