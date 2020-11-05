@@ -1,0 +1,10 @@
+Put files into ignition (to make gazeob even launch)
+
+Put models into gazebo folder (usr/shr/gazebo-7/models)
+This is the groundplane, oaktree, sjtu drone
+
+Give executable rights to scripts
+$cd <ws>/src/sjtu_drone/scripts
+$chmod +x spawn_model
+$chmod +x start_gui
+$chmod +x sstart_gzserver

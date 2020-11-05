@@ -1,0 +1,20 @@
+#1
+roslaunch load_octomap load_octomap.launch
+
+#2
+roslaunch ardrone_moveit_config ardrone_navigation.launch
+
+#3
+rosrun drone_application move_to_waypoint.py _real_drone:=false _aruco_mapping:=false
+
+#4
+rostopic pub /ardrone/takeoff std_msgs/Empty [TAB][TAB]
+
+Give marker in MoveIt!
+
+#4
+rosrun drone_application follow_trajectory.py _real_drone:=false _aruco_coords:=false _visualise_trajectory:=false
+
+
+
+FIX TRUE ARGUMENT RVIZZZZZZZZZZZ

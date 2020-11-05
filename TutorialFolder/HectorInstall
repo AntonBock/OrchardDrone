@@ -1,0 +1,26 @@
+cd /path/to/your/catkin_ws/src
+
+
+#Clone Hector Drone
+git clone https://github.com/tu-darmstadt-ros-pkg/hector_quadrotor.git
+
+cd hector_quadrotor
+
+rosinstall . hector_quadrotor.rosinstall
+
+	Skip on prompt
+
+#Go up two layers
+cd ../../ 
+
+rosdep update
+
+rosdep install --from-paths src/ --ignore-src --rosdistro kinetic
+
+catkin_make
+
+
+
+IF YOU GET ERRORS WITH 
+
+moved folder 'hector_quadrotor_gazebo_plugins' inside 'hector_quadrotor_gazebo'
