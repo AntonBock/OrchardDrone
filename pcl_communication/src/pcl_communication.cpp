@@ -41,8 +41,8 @@ class remove_planes {
 
 //Subscriber and publisher declares as public in the remove_planes class.
 remove_planes::remove_planes(){
-  //sub = nh.subscribe<sensor_msgs::PointCloud2>("/camera/depth/color/points", 10, &remove_planes::callback, this); //Note that this topic will only by activated with the filter command: "filters:=pointcloud"
-  sub = nh.subscribe<sensor_msgs::PointCloud2>("/cloud_pcd", 10, &remove_planes::callback, this);
+  sub = nh.subscribe<sensor_msgs::PointCloud2>("/camera/depth/color/points", 10, &remove_planes::callback, this); //Note that this topic will only by activated with the filter command: "filters:=pointcloud"
+  //sub = nh.subscribe<sensor_msgs::PointCloud2>("/cloud_pcd", 10, &remove_planes::callback, this);
   pub = nh.advertise<pcl_communication::volumetricDataArray>("/volumetric_data", 1); //We define this ourselves and can call it whatever
 }
 
@@ -159,64 +159,63 @@ void remove_planes::callback(const sensor_msgs::PointCloud2::ConstPtr& msg) {
   }
 
 	// Creating the KdTree object for the search method of the extraction
-	std::cout << "Extracting clusters" << std::endl;
-  //pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ>);
-  tree->setInputCloud (cloud_normals);
+  if(cloud_normals->size ()>0){
+    std::cout << "Extracting clusters, as cloud_normals is not empty" << std::endl;
+    //pcl::search::KdTree<pcl::PointXYZ>::Ptr tree (new pcl::search::KdTree<pcl::PointXYZ>);
+    tree->setInputCloud (cloud_normals);
+    std::vector<pcl::PointIndices> cluster_indices;
+    pcl::EuclideanClusterExtraction<pcl::PointXYZ> ec;
+    ec.setClusterTolerance (0.2); // 2cm
+    ec.setMinClusterSize (100);
+    ec.setMaxClusterSize (25000);
+    ec.setSearchMethod (tree);
+    ec.setInputCloud (cloud_normals);
+    ec.extract (cluster_indices);
 
-  std::vector<pcl::PointIndices> cluster_indices;
-  pcl::EuclideanClusterExtraction<pcl::PointXYZ> ec;
-  ec.setClusterTolerance (0.2); // 2cm
-  ec.setMinClusterSize (100);
-  ec.setMaxClusterSize (25000);
-  ec.setSearchMethod (tree);
-  ec.setInputCloud (cloud_normals);
-  ec.extract (cluster_indices);
+    int j = 0;
+    int8_t treeID = 1;
+    pcl_communication::volumetricData volumetric_data; //E.g. the info stored in each entry of the array "msg"
+    pcl_communication::volumetricDataArray volumetric_msg; //E.g. an array of info
+    for (std::vector<pcl::PointIndices>::const_iterator it = cluster_indices.begin (); it != cluster_indices.end (); ++it)
+    {
+      pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_cluster (new pcl::PointCloud<pcl::PointXYZ>);
+      std::cout << "For loop" << std::endl;
+      for (std::vector<int>::const_iterator pit = it->indices.begin (); pit != it->indices.end (); ++pit)
+        cloud_cluster->push_back ((*cloud_normals)[*pit]);
+      cloud_cluster->width = cloud_cluster->size ();
+      cloud_cluster->height = 1;
+      cloud_cluster->is_dense = true;
 
+      std::cout << "PointCloud representing the Cluster: " << cloud_cluster->size () << " data points." << std::endl;
+      std::stringstream ss;
+      ss << "cloud_cluster_" << j << ".pcd";
+      j++;
 
-  int j = 0;
-  int8_t treeID = 1;
-  pcl_communication::volumetricData volumetric_data; //E.g. the info stored in each entry of the array "msg"
-  pcl_communication::volumetricDataArray volumetric_msg; //E.g. an array of info
-  for (std::vector<pcl::PointIndices>::const_iterator it = cluster_indices.begin (); it != cluster_indices.end (); ++it)
-  {
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_cluster (new pcl::PointCloud<pcl::PointXYZ>);
-   	std::cout << "For loop" << std::endl;
- 		for (std::vector<int>::const_iterator pit = it->indices.begin (); pit != it->indices.end (); ++pit)
-      cloud_cluster->push_back ((*cloud_normals)[*pit]);
-    cloud_cluster->width = cloud_cluster->size ();
-    cloud_cluster->height = 1;
-    cloud_cluster->is_dense = true;
+      //Volumetric data
+      std::cout<<"\n DEBUG 4: Calculating volumetric data"<<std::endl;
+      pcl::PointXYZ minPt, maxPt;
+      pcl::getMinMax3D (*cloud_cluster, minPt, maxPt);
 
-    std::cout << "PointCloud representing the Cluster: " << cloud_cluster->size () << " data points." << std::endl;
-    std::stringstream ss;
-    ss << "cloud_cluster_" << j << ".pcd";
-    j++;
+      float tree_height = maxPt.y - minPt.y+0.25;
+      std::cout << "Height of the tree: " << tree_height << std::endl;
+      float tree_width = maxPt.x - minPt.x;
+      std::cout << "Width of the tree: " << tree_width << std::endl;
 
-    //Volumetric data
-    std::cout<<"\n DEBUG 4: Calculating volumetric data"<<std::endl;
-		pcl::PointXYZ minPt, maxPt;
-  	pcl::getMinMax3D (*cloud_cluster, minPt, maxPt);
+      float pi = 3.14159;
+      float tree_volume = pi*(tree_width/2)*(tree_width/2)*tree_height;
+      std::cout << "Cylindrical volume of the tree: " << tree_volume << std::endl;
 
-		float tree_height = maxPt.y - minPt.y+0.25;
-		std::cout << "Height of the tree: " << tree_height << std::endl;
-		float tree_width = maxPt.x - minPt.x;
-		std::cout << "Width of the tree: " << tree_width << std::endl;
+      volumetric_data.tree_height = tree_height;
+      volumetric_data.tree_width = tree_width;
+      volumetric_data.tree_volume = tree_volume;
+      volumetric_data.treeID = treeID;
+      treeID = treeID + 1;
+      volumetric_msg.volumetricData.push_back(volumetric_data);
+    }
 
-		float pi = 3.14159;
-		float tree_volume = pi*(tree_width/2)*(tree_width/2)*tree_height;
-		std::cout << "Cylindrical volume of the tree: " << tree_volume << std::endl;
-
-    volumetric_data.tree_height = tree_height;
-    volumetric_data.tree_width = tree_width;
-    volumetric_data.tree_volume = tree_volume;
-    volumetric_data.treeID = treeID;
-    treeID = treeID + 1;
-    volumetric_msg.volumetricData.push_back(volumetric_data);
-
+    std::cout<<"\n DEBUG 5: Publishing volumetric data!"<<std::endl;
+    pub.publish(volumetric_msg);
   }
-
-  std::cout<<"\n DEBUG 5: Publishing volumetric data!"<<std::endl;
-  pub.publish(volumetric_msg);
 }
 
 
