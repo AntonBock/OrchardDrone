@@ -46,7 +46,7 @@ sudo apt-get install ros-kinetic-gazebo-ros-pkgs ros-kinetic-gazebo-ros-control
 
 
 Add some extra math files: 
-Navigate to the correct folder, and add the math files found in 
+Navigate to the correct folder, and add the math files found in the math folder in this package
 ```c
 sudo nautilus /usr/include/ignition/math2/ignition/math
 ``` 
