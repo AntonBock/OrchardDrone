@@ -6,6 +6,7 @@
   - [hector_quadrotor package installation](#hector_quadrotor-installation)
   - [MoveIt installation](#MoveIt-installation)
   - [Octomap Installation](#Octomap-installation)
+  - [Fix 05/11](#Fix)
   
 ## ROS Kinetic Installation
 
