@@ -169,6 +169,18 @@ In ws/src
 git clone https://bitbucket.org/theconstructcore/tum_ardrone_sim.git
 ```
 
+###To install ground plane and oak_tree models in Gazebo:
+1\. Download the folder "Gazebo Models" from drive (Project/Simulation)
+2\. In terminal write the following:
+
+```c
+cd .gazebo/models/
+nautilus .
+```
+
+3\. Place the folders "my_ground_plane" and "oak_tree" inside the Models folder which will appear in Nautilus. 
+4\. Accept and replace all files of oak_tree (backup of old files is within the one downloaded from Drive)
+
 
 ## Fix
 
