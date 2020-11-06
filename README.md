@@ -87,6 +87,12 @@ Install further dependencies
 rosinstall . /opt/ros/kinetic/ hector_quadrotor.rosinstall
 ``` 
 
+Aaand another dependency
+```c
+sudo apt-get install ros-kinetic-geographic-info
+```
+
+
 You can now catkin_make your project
 ```c
 catkin_make
