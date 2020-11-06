@@ -87,7 +87,7 @@ Move to hector folder
 cd src/hector_quadrotor
 ```
 
-Install further dependencies
+Install further dependencies (press 's' to skip, when prompted)
 ```c
 rosinstall . /opt/ros/kinetic/ hector_quadrotor.rosinstall
 ``` 
