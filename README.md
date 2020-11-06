@@ -8,6 +8,9 @@
   - [Octomap Installation](#Octomap-installation)
   - [Fix 05/11](#Fix)
   
+# How to launch
+Remember to give executable rights to your files, especially octomap
+  
 ## ROS Kinetic Installation
 http://wiki.ros.org/kinetic/Installation/Ubuntu
 
