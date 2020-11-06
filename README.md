@@ -199,7 +199,7 @@ packages you need:
 
 ```c
 https://github.com/wilselby/ROS_quadrotor_simulator
-(maybe) https://github.com/ros/common_msgs/tree/jade-devel (INSTALL BY writing "svn co https://github.com/ros/common_msgs/tree/jade-devel")
+(maybe) https://github.com/ros/common_msgs/tree/jade-devel (INSTALL BY writing "svn co https://github.com/ros/common_msgs.git")
 git clone https://bitbucket.org/theconstructcore/tum_ardrone_sim.git
 ```
 
