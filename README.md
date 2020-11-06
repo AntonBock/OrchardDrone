@@ -144,7 +144,7 @@ sudo apt-get install ros-kinetic-octomap ros-kinetic-octomap-mapping ros-kinetic
 ```
 
 
-cmake
+catkin_make
 
 navigate to octomap_mapping/octomap_server/launch
 
