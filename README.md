@@ -97,6 +97,10 @@ Aaand another dependency
 sudo apt-get install ros-kinetic-geographic-info
 ```
 
+Move back up
+```c
+cd ../../
+```
 
 You can now catkin_make your project
 ```c
