@@ -1,6 +1,6 @@
 Download both octomap_mapping, and octomap_server from github
 
-catkin_make
+cmake
 
 navigate to octomap_mapping/octomap_server/launch
 
