@@ -149,8 +149,9 @@ Install dependencies
 sudo apt-get install ros-kinetic-octomap ros-kinetic-octomap-mapping ros-kinetic-octomap-msgs ros-kinetic-octomap-ros ros-kinetic-octomap-rviz-plugins ros-kinetic-octomap-server
 ```
 
-
-cmake
+```c
+catkin_make
+```
 
 navigate to octomap_mapping/octomap_server/launch
 
