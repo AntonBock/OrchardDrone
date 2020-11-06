@@ -87,6 +87,12 @@ Install further dependencies
 rosinstall . /opt/ros/kinetic/ hector_quadrotor.rosinstall
 ``` 
 
+Aaand another dependency
+```c
+sudo apt-get install ros-kinetic-geographic-info
+```
+
+
 You can now catkin_make your project
 ```c
 catkin_make
@@ -143,8 +149,9 @@ Install dependencies
 sudo apt-get install ros-kinetic-octomap ros-kinetic-octomap-mapping ros-kinetic-octomap-msgs ros-kinetic-octomap-ros ros-kinetic-octomap-rviz-plugins ros-kinetic-octomap-server
 ```
 
-
-cmake
+```c
+catkin_make
+```
 
 navigate to octomap_mapping/octomap_server/launch
 
