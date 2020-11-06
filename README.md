@@ -82,6 +82,11 @@ Install dependencies (replace "kinetic" with your distribution, if you for some 
 rosdep install --from-paths src/ --ignore-src --rosdistro kinetic
 ``` 
 
+Move to hector folder
+```c
+cd src/hector_quadrotor
+```
+
 Install further dependencies
 ```c
 rosinstall . /opt/ros/kinetic/ hector_quadrotor.rosinstall
