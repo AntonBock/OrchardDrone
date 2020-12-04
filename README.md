@@ -293,3 +293,18 @@ install(FILES moveit_simple_controller_manager_plugin_description.xml
 go to tum_ardr
 
 Move hector back to package, cmake
+
+## References
+
+https://github.com/wilselby/ROS_quadrotor_simulator 
+
+https://github.com/tahsinkose/hector-moveit
+
+https://github.com/AlessioTonioni/Autonomous-Flight-ROS
+
+https://github.com/mSimon12/multiple_quadrotors
+
+
+
+
+
