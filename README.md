@@ -1,6 +1,6 @@
 # OrchardDrone
-This project focuses on mapping and data gathering of trees at an orchard using a drone. The project is simulated using Gazebo 7.16.1 in a ROS kinetic distribution. 
-In this repository we provide a simple model of a rectangular orchard in which there is 15 similar tree for the drone to fly among and map. The drone is a simulated hector quadrotor equipped with a xtion depth camera. The mapping produces a 3D octomap in which we can use MoveIt to perform 3D obstacle avoidance and plan paths between waypoints. The waypoints are passed to the drone using the topic /action/pose/goal, which is available through the /action/pose action server. The messages are of the type hector_uav_msgs/PoseActionGoal, which holds information about the cartesian position and orientation, along with the frame of reference.
+This project focuses on mapping and data gathering of trees at an orchard using a drone. The project is simulated using Gazebo 7.16.1, ROS kinetic. 
+In this repository we provide a simple model of a rectangular orchard in which there is 15 similar tree for the drone to fly among and map. The drone is a simulated hector_quadrotor equipped with a ASUS xtion pro live RGB-D camera. The mapping produces a 3D occupancy grid map in which we can use MoveIt to perform 3D obstacle avoidance and plan paths between waypoints. The waypoints are passed to the drone using the topic /action/pose/goal.
 
 
 
@@ -22,7 +22,7 @@ cd **desired folder**
 sudo chmod +x nameOfFile
 ```
 
-## Launching simulation for octomapping
+## Launching simulation for creating a 3D occupancy grid map using OctoMap
 Launch Gazebo and Rviz with a hector_quadrotor
 ```
 roslaunch hector_quadrotor_demo basicForest_zeroed_flying_hector_withLaser.launch
@@ -36,7 +36,7 @@ Send waypoints to the drone to get full 2D coverage
 rosrun sendwaypoints sendwaypoints_node
 ```
 
-When the mapping is done, save the octomap by running
+When the mapping is done, save the 3D occupancy grid map by running
 ```
 rosrun octomap_server octomap_saver -f /home/User/workspaceName/src/mapping/maps/NameOfOctomap.bt
 ```
