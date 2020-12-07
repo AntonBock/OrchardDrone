@@ -1,7 +1,7 @@
 # Packages overview
 
-## `hector_quadrotor`
-model, control and simulation of the hector_quadrotor drone
+## hector_quadrotor
+The * `hector_quadrotor` package and its subfolders provide a model, control and simulation of the hector_quadrotor drone.
 
 ## MoveIt
 * `hector:moveit_actions> `: Determine and execute trajectory
