@@ -15,8 +15,30 @@ In this repository we provide a simple model of a rectangular orchard in which t
 # How to launch
 Remember to give executable rights to your files, especially octomap
 
+## Launching simulation for octomapping
+Launch Gazebo and Rviz with a hectorquadrotor
 ```
 roslaunch hector_quadrotor_demo basicForest_zeroed_flying_hector_withLaser.launch
+```  
+In another terminal window launch octomapping
+```
+roslaunch octomap_server octomap_mapping.launch
+```
+When the mapping is done, save the octomap by running
+```
+rosrun octomap_server octomap_saver -f NameOfOctomap.bt
+```
+
+```
+
+```
+## Launching simulation with octomap for data gathering
+Launch Gazebo and Rviz with a hectorquadrotor
+```
+roslaunch hector_quadrotor_demo basicForest_zeroed_flying_hector_withLaser.launch
+```  
+Send waypoints to the drone
+```  
 rosrun sendWaypoints sendWaypoints_node
 ```  
 ## ROS Kinetic Installation
