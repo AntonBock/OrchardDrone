@@ -1,6 +1,6 @@
 # OrchardDrone
 This project focuses on mapping and data gathering of trees at an orchard using a drone. The project is simulated using Gazebo 7.16.1, ROS kinetic. 
-In this repository we provide a simple model of a rectangular orchard in which there is 15 similar tree for the drone to fly among and map. The drone is a simulated hector_quadrotor equipped with a ASUS xtion pro live RGB-D camera. The mapping produces a 3D occupancy grid map in which we can use MoveIt to perform 3D obstacle avoidance and plan paths between waypoints. The waypoints are passed to the drone using the topic /action/pose/goal.
+In this repository we provide a simple model of a rectangular orchard in which there is 15 similar tree for the drone to fly among and perform mapping. The drone is a simulated hector_quadrotor equipped with a ASUS xtion pro live RGB-D camera. The mapping produces a 3D occupancy grid map in which we can use MoveIt to perform 3D obstacle avoidance and plan paths between waypoints.
 
 
 
