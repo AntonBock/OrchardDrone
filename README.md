@@ -1,7 +1,7 @@
 # OrchardDrone
 This project focuses on mapping and data gathering of trees at an orchard using a drone. The project is simulated using Gazebo 7.16.1 in a ROS kinetic distribution. 
 In this repository we provide a simple model of a rectangular orchard in which there is 12 similar tree for the drone to fly among and map. The drone is a simulated hector quadrotor equipped with a xtion depth camera. The mapping produces a 3D octomap in which we can use MoveIt to perform 3D obstacle avoidance and plan paths between waypoints. The waypoints are passed to the drone using the topic /action/pose/goal, which is available through the /action/pose action server. The messages are of the type hector_uav_msgs/PoseActionGoal, which holds information about the cartesian position and orientation, along with the frame of reference.
-hello
+h
 
 
 # Prerequisites (click for installation guide)
