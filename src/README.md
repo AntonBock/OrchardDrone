@@ -6,7 +6,7 @@ The `hector_quadrotor` package and its subfolders provide a model, control and s
 ## MoveIt
 * `hector:moveit_actions> `: Determine and execute trajectory
 * `hector:moveit_config> `: Configure the drone with MoveIt
-* `hector:moveit_actions> `: Do we want to mention this 1?
+* `hector:moveit_exploration> `: Do we want to mention this 1?
 * `hector:moveit_gazebo> `: Launcing MoveIt in Gazebo
 * `hector:moveit_gazebo_worlds> `: World files for Gazebo
 * `hector:moveit_move_to_goal> `: Send goal positions to the drone using the action server /action/pose
