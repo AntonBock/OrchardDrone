@@ -4,8 +4,8 @@ clc; clear all;
 %entire orchard
 
 %INPUTS needed:
-fieldSize=[24 12]; %Field size X by Y [m]
-gimbal_angle=20; %Angle of the camera gimbal respect horizontal axis [deg]
+fieldSize=[24 11.5]; %Field size X by Y [m]
+gimbal_angle=90; %Angle of the camera gimbal respect horizontal axis [deg]
 FOV_h=70; %Horizontal field of view of the camera [deg]
 h_tree_max=2;%Height of the tallest tree [m]
 
@@ -31,22 +31,34 @@ waypoints=zeros(rows*columns,2);
 for i=1:columns %Number of columns of the point grid
     if rem(i,2)==1 %if the number of the column is odd
         for j=1:rows
-           waypoints((i-1)*rows+j,:)=[WPx WPy]; %Row created following positive direction
-           WPy=WPy+step; %next point
+            waypoints((i-1)*rows+j,:)=[WPx WPy]; %Row created following positive direction
+            if WPy+step>fieldSize(1)
+                WPy=fieldSize(1);
+            else
+                WPy=WPy+step; %next point
+            end
         end
     elseif rem(i,2)==0 %if the number of the column is even
         for j=rows:-1:1
-           waypoints((i-1)*rows+j,:)=[WPx WPy]; %Row created following negative direction
-           WPy=WPy+step; %next point
+            waypoints((i-1)*rows+j,:)=[WPx WPy]; %Row created following negative direction
+            if WPy+step>fieldSize(1)
+                WPy=fieldSize(1);
+            else
+                WPy=WPy+step; %next point
+            end
         end
     end
     WPy=0; %Reinicialize Y position
-    WPx=WPx+step;%next row
+    if WPx+step>fieldSize(2)
+        WPx=fieldSize(2);
+    else
+        WPx=WPx+step; %next row
+    end
 end
 
-if fieldSize(1)>fieldSize(2)
-    waypoints=fliplr(waypoints);
-end
+ if fieldSize(1)>fieldSize(2)
+     waypoints=fliplr(waypoints);
+ end
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Show result
 
@@ -59,13 +71,15 @@ grid on;
 
 
 waypoints=[waypoints ones(length(waypoints),1)*h_drone];
-plot(waypoints(:,1), waypoints(:,2), ".r", "MarkerSize", 15)
 rectangle('Position',[0 0 fieldSize]);
-plot(waypoints(:,1), waypoints(:,2), "-b")
+plot(waypoints(:,1), waypoints(:,2), '-','Color',[0,0.5,1],'Linewidth',2.5)
+plot(waypoints(:,1), waypoints(:,2), ".r", "MarkerSize", 20)
 xlim=[-1 25];
 ylim=[-1 13];
 axis equal
 view(2)
+
+
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Create excel file of the waypoints

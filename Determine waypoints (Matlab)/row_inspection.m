@@ -17,7 +17,8 @@ pcshow(tree2);
 X=tree2.Location(:,1);
 Y=tree2.Location(:,2);
 tree3=pointCloud([X Y zeros(length(X),1)]);
-minDistance=0.5; %Minimum distance between trees
+minDistance=0.2; %The points that are within 0.2 meters of each other
+                 %are registered within the same cluster
 [labels,numClusters] = pcsegdist(tree3,minDistance);
 figure
 pcshow(tree3.Location,labels);
@@ -43,7 +44,7 @@ for i=1:numClusters
     xmax=xmin+w;
     ymax=ymin+h;
     BBmm(i,:)=[xmin ymin xmax ymax];
-    rectangle('Position', BBoxes(i,:),'EdgeColor','r','LineWidth',2) ;%Show each bounding box
+    %rectangle('Position', BBoxes(i,:),'EdgeColor','r','LineWidth',2) ;%Show each bounding box
 end
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -172,9 +173,8 @@ WP=[WP;WPR(end,:)];%Final waypoint
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Show waypoints and path
 hold on
-pcshow([WP(:,1) WP(:,2) zeros(length(WP),1)], ".r", "MarkerSize", 100) %Show waypoints
-plot3(WP(:,1), WP(:,2),zeros(length(WP),1),'-b') %Show path
-
+plot3(WP(:,1), WP(:,2),zeros(length(WP),1),'-','Color',[0,0.5,1],'Linewidth',2.5) %Show path
+pcshow([WP(:,1) WP(:,2) zeros(length(WP),1)], ".r", "MarkerSize", 200) %Show waypoints
 view(2)
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Determine tree center position
